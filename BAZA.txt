@@ -1,44 +1,55 @@
-CREATE TABLE KORISNIK
-(
-  korisnickoIme VARCHAR(30) NOT NULL,
-  lozinka VARCHAR(30),
-  ime VARCHAR(50) NOT NULL,
-  prezime VARCHAR(50) NOT NULL,
-  uloga VARCHAR(30) NOT NULL,
-  PRIMARY KEY (korisnickoIme)
-);
-
-CREATE TABLE GRUPA_PITANJA
+CREATE TABLE GRUPA_ZADATAKA
 (
   idGrupe SERIAL NOT NULL,
-  namjena VARCHAR(50) NOT NULL,
-  valuta VARCHAR(15) NOT NULL,
-  pokreni VARCHAR(5) NOT NULL,
-  naziv VARCHAR(30) NOT NULL,
+  namjena VARCHAR(30) NOT NULL,
+  valuta VARCHAR(20) NOT NULL,
+  pokreni INT NOT NULL,
+  naziv VARCHAR(50) NOT NULL,
+  zadaci VARCHAR(25) NOT NULL,
   PRIMARY KEY (idGrupe)
 );
 
 CREATE TABLE ZADATAK
 (
   idZad INT NOT NULL,
-  vrsta VARCHAR(20) NOT NULL,
+  vrsta VARCHAR(50) NOT NULL,
   pitanje VARCHAR(2000) NOT NULL,
   tocanOdgovor VARCHAR(2000) NOT NULL,
   hint VARCHAR(2000) NOT NULL,
-  novacZaPrikaz VARCHAR(200),
-  prviOdgovor VARCHAR(2000),
+  novacZaPrikaz VARCHAR(50),
   drugiOdgovor VARCHAR(2000),
   treciOdgovor VARCHAR(2000),
   cetvrtiOdgovor VARCHAR(2000),
+  tipNovca VARCHAR(50),
   PRIMARY KEY (idZad)
 );
 
 CREATE TABLE NOVAC
 (
   id SERIAL NOT NULL,
-  ime VARCHAR(30) NOT NULL,
-  url VARCHAR(300) NOT NULL,
+  ime VARCHAR(100) NOT NULL,
+  url VARCHAR(1000) NOT NULL,
+  tip VARCHAR(20) NOT NULL,
+  valuta VARCHAR(20) NOT NULL,
   PRIMARY KEY (id)
+);
+
+CREATE TABLE UCITELJ
+(
+  korisnickoIme VARCHAR(30) NOT NULL,
+  lozinka VARCHAR(30) NOT NULL,
+  ime VARCHAR(50) NOT NULL,
+  prezime VARCHAR(50) NOT NULL,
+  idUcitelja SERIAL NOT NULL,
+  PRIMARY KEY (idUcitelja)
+);
+
+CREATE TABLE SKOLA
+(
+  idSkole SERIAL NOT NULL,
+  ime VARCHAR(200) NOT NULL,
+  mjesto VARCHAR(300) NOT NULL,
+  PRIMARY KEY (idSkole)
 );
 
 CREATE TABLE seNalaziU
@@ -46,19 +57,42 @@ CREATE TABLE seNalaziU
   idGrupe INT NOT NULL,
   idZad INT NOT NULL,
   PRIMARY KEY (idGrupe, idZad),
-  FOREIGN KEY (idGrupe) REFERENCES GRUPA_PITANJA(idGrupe),
+  FOREIGN KEY (idGrupe) REFERENCES GRUPA_ZADATAKA(idGrupe),
   FOREIGN KEY (idZad) REFERENCES ZADATAK(idZad)
+);
+
+CREATE TABLE RAZRED
+(
+  idRazred SERIAL NOT NULL,
+  odjeljenje VARCHAR(5) NOT NULL,
+  idUcitelja INT NOT NULL,
+  idSkole INT NOT NULL,
+  PRIMARY KEY (idRazred),
+  FOREIGN KEY (idUcitelja) REFERENCES UCITELJ(idUcitelja),
+  FOREIGN KEY (idSkole) REFERENCES SKOLA(idSkole)
+);
+
+CREATE TABLE UCENIK
+(
+  idUcenika SERIAL NOT NULL,
+  ime VARCHAR(50) NOT NULL,
+  prezime VARCHAR(50) NOT NULL,
+  idRazred INT NOT NULL,
+  PRIMARY KEY (idUcenika),
+  FOREIGN KEY (idRazred) REFERENCES RAZRED(idRazred)
 );
 
 CREATE TABLE LOGS
 (
-  vrijeme TIMESTAMP NOT NULL,
-  odgovori JSON NOT NULL,
+  vrijeme TIMESTAMP,
+  odgovor VARCHAR(2000) NOT NULL,
+  tocan VARCHAR(2000) NOT NULL,
   id SERIAL NOT NULL,
-  korisnickoIme VARCHAR(30) NOT NULL,
+  idUcenika INT NOT NULL,
   idGrupe INT NOT NULL,
+  idZadatka INT NOT NULL,
+  trajanje VARCHAR(30) NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (korisnickoIme) REFERENCES KORISNIK(korisnickoIme),
-  FOREIGN KEY (idGrupe) REFERENCES GRUPA_PITANJA(idGrupe),
-  UNIQUE (korisnickoIme, idGrupe, id)
+  FOREIGN KEY (idUcenika) REFERENCES UCENIK(idUcenika),
+  FOREIGN KEY (idGrupe) REFERENCES GRUPA_ZADATAKA(idGrupe)
 );
