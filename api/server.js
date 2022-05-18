@@ -19,5 +19,5 @@ app.use('/teacherProfile', teacherProfileRouter);
 app.use('/loginStudent', loginStudentRouter);
 app.use('/exercise', exerciseRouter);
 
-const PORT = 8000
+const PORT = process.env.PORT || 8000
 app.listen(PORT);

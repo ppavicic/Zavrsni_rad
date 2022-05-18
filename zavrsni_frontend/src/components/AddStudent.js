@@ -107,25 +107,25 @@ class AddStudent extends React.Component {
         classesList.push(<option disabled key={-1} value={"default"}>Odaberi razred</option>)
 
         return (
-            <div className=" d-flex flex-column justify-content-center align-items-center" style={background}>
-                <h3 className="text-center text-white bg-dark">Dodaj učenika</h3>
-                <form onSubmit={this.handleSubmit} className="w-100 container">
+            <div className="d-flex flex-column justify-content-center align-items-center" style={background}>
+                <h3 className="text-center font">Dodaj učenika</h3>
+                <form onSubmit={this.handleSubmit} className="w-100 container pozadina">
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-lg-3">
+                        <div className="form-group col-xl-3">
                             <label>Ime</label>
                             <input type="text" name="ime" value={this.state.ime} className="form-control" placeholder="Enter name" onChange={this.handleChange} required />
                         </div>
                     </div>
 
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-lg-3">
+                        <div className="form-group col-xl-3">
                             <label>Prezime</label>
                             <input type="text" name="prezime" value={this.state.prezime} className="form-control" placeholder="Enter surname" onChange={this.handleChange} required />
                         </div>
                     </div>
 
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-lg-3">
+                        <div className="form-group col-xl-3">
                             <label>Razred</label>
                             <select  defaultValue={'default'} name="idRazreda" className="form-select" aria-label="Default select example" onChange={(e) => this.handleChange(e, 'value')}>
                                 {classesList}
@@ -133,8 +133,8 @@ class AddStudent extends React.Component {
                         </div>
                     </div>
 
-                    <div className="col-md-12 text-center">
-                        <button type="submit" className="col btn btn-primary btn-block btn-success mt-2">Dodaj</button>
+                    <div className="col-md-12 text-center mb-2">
+                        <button type="submit" className="mx-2 col btn btn-primary btn-block btn-success mt-2">Dodaj</button>
                         <button className="btn btn-danger btn-block mt-2" onClick={this.return}>Nazad</button>
                     </div>
                 </form>

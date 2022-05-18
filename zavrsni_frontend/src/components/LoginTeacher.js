@@ -1,5 +1,6 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
+import '../styles/login.css'
 import Image from '../images/money.jpg';
 import { Navigate } from 'react-router-dom'
 import { Alert } from 'react-bootstrap'
@@ -87,28 +88,30 @@ class LoginTeacher extends React.Component {
         }
         return (
             <div className=" d-flex flex-column justify-content-center align-items-center" style={background}>
-                <h3>Prijava</h3>
-                <form onSubmit={this.handleSubmit} className="w-100 container">
+                <h3 className="font">Prijava</h3>
+                <form onSubmit={this.handleSubmit} className="w-100 container pozadina">
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-lg-3">
+                        <div className="form-group col-xl-3">
                             <label>Korisničko ime</label>
-                            <input type="text" name="username" value={this.state.username} className="form-control" placeholder="Enter username" onChange={this.handleChange} />
+                            <input type="text" name="username" value={this.state.username} className="form-control w-100" placeholder="Enter username" onChange={this.handleChange} />
                         </div>
                     </div>
 
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-lg-3">
+                        <div className="form-group col-xl-3">
                             <label>Lozinka</label>
                             <input type="password" name="lozinka" value={this.state.lozinka} className="form-control" placeholder="Enter password" onChange={this.handleChange} />
                         </div>
                     </div>
-                    <div className="col-md-12 text-center">
-                        <button type="submit" className="col btn btn-primary btn-block btn-success mt-2">Prijavi se</button>
+                    
+                    <div className="col-md-12 text-center mb-2">
+                        <button type="submit" className="mx-2 col btn btn-primary btn-block btn-success mt-2 mr-2">Prijavi se</button>
                         <button className="col btn btn-primary btn-block btn-danger mt-2" onClick={this.start}>Povratak</button>
                     </div>
-                    {this.state.loginError &&
-                        <div className="mt-3"><Alert className="alert-dismissible" variant={'danger'}>{this.state.errorText}</Alert></div>}
                 </form>
+
+                {this.state.loginError &&
+                    <div className="mt-3"><Alert className="alert-dismissible" variant={'danger'}>{this.state.errorText}</Alert></div>}
             </div>
         );
     }

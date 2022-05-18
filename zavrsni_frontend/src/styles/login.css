@@ -1,0 +1,7 @@
+.pozadina{
+    background-color: lightskyblue;
+    border: 3px solid;
+    border-radius: 3px;
+    color: rgb(67, 67, 174);
+    overflow: auto;
+}

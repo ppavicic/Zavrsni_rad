@@ -1,6 +1,6 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Image from '../images/money.jpg';
+import '../styles/login.css'
 import { Navigate } from 'react-router-dom'
 import { Alert } from 'react-bootstrap'
 import axios from 'axios'
@@ -237,32 +237,26 @@ class LoginStudent extends React.Component {
         )
         studentsList.push(<option disabled key={-1} value={"default"}>Choose an option</option>)
 
-        var background = {
-            backgroundImage: `url()`,
-            backgroundPosition: 'center',
-            backgroundSize: '100% ',
-            backgroundRepeat: 'no-repeat'
-        }
         var zindex = {
             zIndex: 1
         }
 
         return (
             <div className="d-flex flex-column justify-content-center align-items-center">
-                <h1 className="my-5">VJEŽBALICA</h1>
-                <div className="w-50 container d-flex flex-column justify-content-center bg-info text-white align-items-center border border-primary rounded">
+                <h1 className="my-4 font">VJEŽBALICA</h1>
+                <div className="w-50 container d-flex flex-column justify-content-center align-items-center pozadina">
                     <form onSubmit={this.handleSubmit} className="w-100 container d-flex flex-column justify-content-center align-items-center">
-                        <h2>Škola</h2>
+                        <h2 className="pt-1">Škola</h2>
                         <select value={this.state.skola} defaultValue={'default'} name="skola" className="form-select" aria-label="Default select example" onChange={(e) => this.handleSchoolChange(e, 'value')}>
                             {schoolsList}
                         </select>
 
-                        <h2>Razred</h2>
+                        <h2 className="pt-1">Razred</h2>
                         <select value={this.state.razred} defaultValue={'default'} name="razred" className="form-select" aria-label="Default select example" onChange={(e) => this.handleClassChange(e, 'value')}>
                             {classesList}
                         </select>
 
-                        <h2>Učenik</h2>
+                        <h2 className="pt-1">Učenik</h2>
                         <select value={this.state.ucenik} defaultValue={'default'} name="ucenik" className="form-select" aria-label="Default select example" onChange={(e) => this.handleStudentChange(e, 'value')}>
                             {studentsList}
                         </select>

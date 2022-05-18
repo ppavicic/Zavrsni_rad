@@ -1,5 +1,6 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
+import '../styles/login.css'
 import { Navigate } from 'react-router-dom'
 import { Alert } from 'react-bootstrap'
 import Image from '../images/money.jpg';
@@ -103,9 +104,9 @@ class AddTask extends React.Component {
         typeOfMoney.push(<option disabled key={3} value={'default'}>Odaberi tip novca</option>)
 
         return (
-            <div className=" d-flex flex-column justify-content-center align-items-center" style={background}>
-                <h3 className="text-center text-white bg-dark">Dodaj zadatak</h3>
-                <form onSubmit={this.handleSubmit} className="w-100 container">
+            <div className="d-flex flex-column justify-content-center align-items-center" style={background}>
+                <h3 className="font text-center">Dodaj zadatak</h3>
+                <form onSubmit={this.handleSubmit} className="w-100 container pozadina">
                     <div className="row justify-content-center">
                         <div className="form-group col-lg-3">
                             <label>ID zadatka:</label>
@@ -201,14 +202,13 @@ class AddTask extends React.Component {
                         </div>
                     </div>
 
-                    <div className="col-md-12 text-center">
-                        <button type="submit" className="col btn btn-primary btn-block btn-success mt-2">Dodaj</button>
+                    <div className="col-md-12 text-center my-2">
+                        <button type="submit" className="mx-2 col btn btn-primary btn-block btn-success mt-2">Dodaj</button>
                         <button className="btn btn-danger btn-block mt-2" onClick={this.return}>Nazad</button>
                     </div>
-
-                    {this.state.addingError &&
-                        <div className="mt-3"><Alert className="alert-dismissible" variant={'danger'}>{this.state.errorText}</Alert></div>}
                 </form>
+                {this.state.addingError &&
+                    <div className="mt-3"><Alert className="alert-dismissible" variant={'danger'}>{this.state.errorText}</Alert></div>}
             </div>
         );
     }

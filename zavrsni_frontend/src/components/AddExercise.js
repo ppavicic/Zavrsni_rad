@@ -91,18 +91,18 @@ class AddExercise extends React.Component {
         choose.push(<option disabled key={2} value={'default'}>Odaberi DA ili NE</option>)
 
         return (
-            <div className=" d-flex flex-column justify-content-center align-items-center" style={background}>
-                <h3 className="text-center text-white bg-dark">Dodaj vježbu</h3>
-                <form onSubmit={this.handleSubmit} className="w-100 container">
+            <div className="d-flex flex-column justify-content-center align-items-center" style={background}>
+                <h3 className="text-center font">Dodaj vježbu</h3>
+                <form onSubmit={this.handleSubmit} className="w-100 container pozadina">
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-lg-4">
+                        <div className="form-group col-xl-4">
                             <label>Naziv vježbe</label>
                             <input type="text" name="naziv" value={this.state.naziv} className="form-control" placeholder="Enter name" onChange={this.handleChange} />
                         </div>
                     </div>
 
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-lg-4">
+                        <div className="form-group col-xl-4">
                             <label>Namjena</label>
                             <select defaultValue={'default'} name="namjena" className="form-select" aria-label="Default select example" onChange={(e) => this.handleChange(e, 'value')}>
                                 {purpose}
@@ -111,7 +111,7 @@ class AddExercise extends React.Component {
                     </div>
 
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-lg-4">
+                        <div className="form-group col-xl-4">
                             <label>Valuta u zadacima</label>
                             <select defaultValue={'default'} name="valuta" className="form-select" aria-label="Default select example" onChange={(e) => this.handleChange(e, 'value')}>
                                 {currency}
@@ -120,7 +120,7 @@ class AddExercise extends React.Component {
                     </div>
 
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-lg-4">
+                        <div className="form-group col-xl-4">
                             <label>Odabrat ovu vježbu za rješavanje?</label>
                             <select defaultValue={'default'} name="pokreni" className="form-select" aria-label="Default select example" onChange={(e) => this.handleChange(e, 'value')}>
                                 {choose}
@@ -129,20 +129,19 @@ class AddExercise extends React.Component {
                     </div>
 
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-lg-4">
+                        <div className="form-group col-xl-4">
                             <label>Unesite ID zadataka koje želite u vježbi odvojene sa ","</label>
                             <input type="text" name="idzadataka" value={this.state.idzadataka} className="form-control" placeholder="1,2,3" onChange={this.handleChange} />
                         </div>
                     </div>
 
-                    <div className="col-md-12 text-center">
-                        <button type="submit" className="col btn btn-primary btn-block btn-success mt-2">Dodaj</button>
+                    <div className="my-2 col-md-12 text-center">
+                        <button type="submit" className="mx-2 col btn btn-primary btn-block btn-success mt-2">Dodaj</button>
                         <button className="btn btn-danger btn-block mt-2" onClick={this.return}>Nazad</button>
                     </div>
-
-                    {this.state.addingError &&
-                        <div className="mt-3"><Alert className="alert-dismissible" variant={'danger'}>{this.state.errorText}</Alert></div>}
                 </form>
+                {this.state.addingError &&
+                    <div className="mt-3"><Alert className="alert-dismissible" variant={'danger'}>{this.state.errorText}</Alert></div>}
             </div>
         );
     }

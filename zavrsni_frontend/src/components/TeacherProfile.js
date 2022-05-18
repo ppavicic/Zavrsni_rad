@@ -1,4 +1,5 @@
 import React from "react";
+import '../styles/index.css'
 import { Table, Button, Container } from 'react-bootstrap'
 import { Navigate } from 'react-router-dom'
 import axios from 'axios'
@@ -177,7 +178,7 @@ class TeacherProfile extends React.Component {
                 <td>{exercise.valuta}</td>
                 <td>{exercise.zadaci}</td>
                 <td>{exercise.pokreni}</td>
-                <td><Button variant="secondary" className="inline-" value={'vjezba:' + exercise.idgrupe} onClick={(e) => this.handleEdit(e, 'value')}>Uredi</Button></td>
+                <td><Button variant="info" className="inline- text-white" value={'vjezba:' + exercise.idgrupe} onClick={(e) => this.handleEdit(e, 'value')}>Uredi</Button></td>
             </tr>
         )
 
@@ -190,7 +191,7 @@ class TeacherProfile extends React.Component {
                 <td>{task.pitanje}</td>
                 <td>{task.tocanodgovor}</td>
                 <td>{task.hint}</td>
-                <td><Button variant="secondary" className="inline-" value={'zadatak:' + task.idzad} onClick={(e) => this.handleEdit(e, 'value')}>Uredi</Button></td>
+                <td><Button variant="info" className="inline- text-white" value={'zadatak:' + task.idzad} onClick={(e) => this.handleEdit(e, 'value')}>Uredi</Button></td>
             </tr>
         )
 
@@ -203,16 +204,16 @@ class TeacherProfile extends React.Component {
                 <td>{student.prezime}</td>
                 <td>{student.odjeljenje}</td>
                 <td><Button variant="primary" className="inline-" value={student.iducenika} onClick={(e) => this.handleStats(e)}>Statistika</Button></td>
-                <td><Button variant="secondary" className="inline-" value={'student:' + student.iducenika} onClick={(e) => this.handleEdit(e, 'value')}>Uredi</Button></td>
+                <td><Button variant="info" className="inline- text-white" value={'student:' + student.iducenika} onClick={(e) => this.handleEdit(e, 'value')}>Uredi</Button></td>
             </tr>
         )
         return (
             <Container className="Margin-top">
                 <br />
-                <h1 className="text-center mb-3">MOJ PROFIL</h1>
-                <div className="d-flex justify-content-around">
-                    <p className="text-primary">ŠKOLA: {skola}</p>
-                    <Button variant="btn btn-outline-info" className="btn-lg inline-" onClick={this.handlePopup}>OPCIJE</Button>
+                <h1 className="text-center mb-3 font">MOJ PROFIL</h1>
+                <div className="d-flex justify-content-around align-items-center font pozadina py-2">
+                    <p>ŠKOLA: {skola}</p>
+                    <Button variant="btn btn-outline-primary" className="btn-lg inline-" onClick={this.handlePopup}>OPCIJE</Button>
                 </div>
                 <hr />
                 {this.state.showPopup &&
@@ -224,9 +225,9 @@ class TeacherProfile extends React.Component {
                     </div>
                 }
                 <hr />
-                <h3 className="text-center">Vježbe</h3>
+                <h3 className="text-center font">Vježbe</h3>
                 <Table className="table-hover">
-                    <thead>
+                    <thead className="font">
                         <tr>
                             <th>ID</th>
                             <th className="w-25">Naziv</th>
@@ -242,9 +243,9 @@ class TeacherProfile extends React.Component {
                     </tbody>
                 </Table>
                 <br />
-                <h3 className="text-center">Zadaci</h3>
+                <h3 className="text-center font">Zadaci</h3>
                 <Table className="table-hover">
-                    <thead>
+                    <thead className="font">
                         <tr>
                             <th>ID</th>
                             <th>Vrsta</th>
@@ -259,9 +260,9 @@ class TeacherProfile extends React.Component {
                     </tbody>
                 </Table>
                 <br />
-                <h3 className="text-center">Moji učenici</h3>
+                <h3 className="text-center font">Moji učenici</h3>
                 <Table className="table-hover">
-                    <thead>
+                    <thead className="font">
                         <tr>
                             <th>ID</th>
                             <th>Ime</th>

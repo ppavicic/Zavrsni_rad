@@ -1,5 +1,6 @@
 import React from 'react'
-import Image from '../images/money.jpg';
+import image from '../images/monopoly.png'
+import '../styles/index.css'
 import { Button } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Navigate, Redirect, Link } from 'react-router-dom'
@@ -78,22 +79,17 @@ class Welcome extends React.Component {
             }
         }
 
-        var background = {
-            backgroundImage: `url()`,
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat'
-        }
         return (
-            <div style={background}>
-                <h1 className='container text-center py-2'>Dobrodošli na vježbalicu!</h1>
-                <div className='w-25 container text-center text-white bg-dark'>Za početak vježbe pritisni START</div>
-                <div className='container h-75 d-flex flex-column justify-content-center align-items-center'>
-                    <div>
+            <div className='d-flex flex-column align-items-center'>
+                <h1 className='container text-center py-2 font'>DOBRODOŠLI NA VJEŽBALICU!</h1>
+                <div className='w-25 container text-center pozadina'>Za početak vježbe pritisni START</div>
+                {/*<img className='mt-5 w-50 h-25 slika' src={image}></img>*/}
+                <div className='container mt-5 w-50 d-flex flex-column justify-content-center align-items-center pozadina'>
+                    <div className='mt-2'>
                         <Link to="/loginStudent" className="btn btn-primary btn-lg" onClick={this.getExercise}>START</Link>
                     </div>
                     <div className="mt-1">
-                        <span className='font-weight-bold'>Učitelj/ica? </span> <Link to="/loginTeacher">Prijavi se!</Link>
+                        <span className=''>Učitelj/ica? </span> <Link to="/loginTeacher">Prijavi se!</Link>
                     </div>
                 </div>
             </div >

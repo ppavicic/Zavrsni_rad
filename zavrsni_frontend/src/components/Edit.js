@@ -245,14 +245,14 @@ class Edit extends React.Component {
         choose.push(<option disabled key={2} value={'default'}>Odaberi DA ili NE</option>)
 
         return (
-            <div className=" d-flex flex-column justify-content-center align-items-center" style={background}>
+            <div>
                 {this.state.showStudent &&  //student
                     <div className="w-100">
-                        <div className="d-flex justify-content-center">
-                            <h3 className="text-center text-white bg-dark w-25">Uredi učenika</h3>
+                        <div className="d-flex justify-content-center font">
+                            <h3 className="text-center w-25">Uredi učenika</h3>
                         </div>
-                        <p className="text-center">ID UČENIKA: {this.state.studentIdPlaceholder} | IME: {studentFirstNamePlaceholder} | PREZIME: {studentLastNamePlaceholder}</p>
-                        <form onSubmit={this.handleSubmit} className="w-100 container">
+                        <p className="text-center font">ID UČENIKA: {this.state.studentIdPlaceholder} | IME: {studentFirstNamePlaceholder} | PREZIME: {studentLastNamePlaceholder}</p>
+                        <form onSubmit={this.handleSubmit} className="w-100 container pozadina">
                             <div className="row justify-content-md-center">
                                 <div className="form-group col-lg-3">
                                     <label>Ime</label>
@@ -266,8 +266,8 @@ class Edit extends React.Component {
                                     <input type="text" required name="prezime" value={this.state.prezime} className="form-control" placeholder={studentLastNamePlaceholder} onChange={this.handleChange} />
                                 </div>
                             </div>
-                            <div className="col-md-12 text-center">
-                                <button type="submit" className="col btn btn-primary btn-block btn-success mt-2">Uredi</button>
+                            <div className="my-2 col-md-12 text-center">
+                                <button type="submit" className="mx-2 col btn btn-primary btn-block btn-success mt-2">Uredi</button>
                                 <button className="btn btn-danger btn-block mt-2" onClick={this.return}>Nazad</button>
                             </div>
                         </form>
@@ -275,14 +275,14 @@ class Edit extends React.Component {
                 }
                 {this.state.showZadatak &&  //zadatak
                     <div className="w-100">
-                        <div className="d-flex justify-content-center">
-                            <h3 className="text-center text-white bg-dark w-25">Uredi zadatak</h3>
+                        <div className="d-flex justify-content-center font">
+                            <h3 className="text-center w-25">Uredi zadatak</h3>
                         </div>
-                        <p className="text-center">ID: {this.state.taskIdPlaceholder} | VRSTA: {this.state.taskTypePlaceholder} | PITANJE: {taskQuestionPlaceholder}</p>
-                        <p className="text-center">TOČAN ODGOVOR: {taskCorrectAnswerPlaceholder} | HINT: {taskHintPlaceholder}</p>
-                        <form onSubmit={this.handleSubmit} className="w-100 container">
+                        <p className="text-center font">ID: {this.state.taskIdPlaceholder} | VRSTA: {this.state.taskTypePlaceholder} | PITANJE: {taskQuestionPlaceholder}</p>
+                        <p className="text-center font">TOČAN ODGOVOR: {taskCorrectAnswerPlaceholder} | HINT: {taskHintPlaceholder}</p>
+                        <form onSubmit={this.handleSubmit} className="w-100 container pozadina my-2">
                             {this.state.taskTypePlaceholder == "slikovnoOdabir" &&
-                                <p className="text-center text-white bg-dark">
+                                <p className="text-center font">
                                     KOD OVAKVIH PITANJA ĆE BITI PRIKAZANE SLIKE SVIH NOVČANICA I KOVANICA KOJE ĆE UČENIK MOĆI BIRAT DA UNESE TRAŽENU VRIJEDNOST
                                 </p>
                             }
@@ -351,8 +351,8 @@ class Edit extends React.Component {
                                 </div>
                             </div>
 
-                            <div className="col-md-12 text-center">
-                                <button type="submit" className="col btn btn-primary btn-block btn-success mt-2">Uredi</button>
+                            <div className="my-2 col-md-12 text-center">
+                                <button type="submit" className="mx-2 col btn btn-primary btn-block btn-success mt-2">Uredi</button>
                                 <button className="btn btn-danger btn-block mt-2" onClick={this.return}>Nazad</button>
                             </div>
                         </form>
@@ -415,7 +415,8 @@ class Edit extends React.Component {
                     </div>
                 }
                 {this.state.updateError &&
-                    <div className="mt-3"><Alert className="alert-dismissible" variant={'danger'}>{this.state.errorText}</Alert></div>}            </div>
+                    <div className="mt-3"><Alert className="alert-dismissible" variant={'danger'}>{this.state.errorText}</Alert></div>}
+            </div>
 
         );
     }
