@@ -1,6 +1,7 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Image from '../images/money.jpg';
+import '../styles/login.css'
 import { Alert } from 'react-bootstrap'
 import axios from 'axios'
 import { URL } from './Constants'
@@ -71,7 +72,6 @@ class PictureInputTask extends React.Component {
             odgovor: this.state.odgovorKorisnika,
             tocan: vjezba.zadaci[brojRijesenih].tocanodgovor
         }
-        console.log(log)
         axios.post(URL + '/exercise/sendLog', log, { withCredentials: false })
             .then(result => {
                 //console.log(result.data.odg)
@@ -101,7 +101,6 @@ class PictureInputTask extends React.Component {
             novacZaPrikaz: this.state.novacZaPrikaz,
             valuta: vjezba.valuta
         }
-        console.log(data)
         axios.post(URL + '/exercise/getMoney', data, { withCredentials: false })
             .then(response => {
                 this.setState({
@@ -118,10 +117,11 @@ class PictureInputTask extends React.Component {
 
         var imageDiv = {
             height: `15vh`,
-            width: `25vw`
+            minWidth: `300px`,
+            maxWidth: '300px'
         }
         var imageRender = {
-            imageRendering: `-webkit-optimize-contrast`
+            imageRendering: `-webkit-optimize-contrast`,
         }
         var zindex = {
             zIndex: 1
@@ -129,25 +129,25 @@ class PictureInputTask extends React.Component {
         const novac = this.state.novac
         const moneyList = novac.map((n, i) =>
             <div key={i} style={imageDiv} className="col-4">
-                <img style={imageRender} width="100%" height="100%" src={n.url}></img>
+                <img className="" style={imageRender} width="100%" height="100%" src={n.url}></img>
             </div>
         )
         return (
-            <div className="h-100 d-flex flex-column py-1">
-                <div className="h-25 border border-secondary text-white bg-secondary bg-gradient d-flex flex-column justify-content-around align-items-center">
-                    <p>{vjezba.brojRijesenih+1}. {this.state.pitanje}</p>
-                    <button className="btn btn-outline-warning btn-sm" data-toggle="button" aria-pressed="false" autoComplete="off" onClick={this.showHint}>HINT</button>
+            <div className="h-100 d-flex flex-column py-1 px-0">
+                <div className="h-25 pozadina font d-flex flex-column justify-content-around align-items-center">
+                    <p>{vjezba.brojRijesenih + 1}. {this.state.pitanje}</p>
                     <div className="my-3">
+                        <button className="btn btn-warning btn-sm mx-3" data-toggle="button" aria-pressed="false" autoComplete="off" onClick={this.showHint}>HINT</button>
                         {this.state.showHint && this.state.hint}
                     </div>
                 </div>
-                <div className="h-75 !important border border-secondary d-flex flex-column justify-content-center align-items-center">
+                <div className="h-75 !important bg-white pozadina border-top-0 d-flex flex-column justify-content-center align-items-center">
                     <div className="w-100 row h-75 justify-content-around align-items-center">
                         {moneyList}
                     </div>
                     {this.state.taskError && !this.state.taskSucces && <div style={zindex}><Alert className="alert-dismissible fade show" variant={'danger'}>{this.state.errorText}</Alert></div>}
                     {this.state.taskSucces && <div style={zindex}><Alert className="alert-dismissible fade show" variant={'success'}>Točan odgovor!</Alert></div>}
-                    <form onSubmit={this.handleSubmit} className="w-100 h-25 bg-secondary bg-gradient d-flex justify-content-center align-items-center">
+                    <form onSubmit={this.handleSubmit} className="w-100 pozadina border-0 h-25 d-flex justify-content-center align-items-center">
                         <div className="input-group my-2 w-50">
                             <input name="odgovorKorisnika" value={this.state.odgovorKorisnika} type="text" className="form-control" placeholder="Enter answer"
                                 aria-label="Enter answer" aria-describedby="basic-addon2" onChange={this.handleChange}></input>

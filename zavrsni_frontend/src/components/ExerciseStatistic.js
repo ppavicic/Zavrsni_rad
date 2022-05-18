@@ -97,10 +97,10 @@ class ExerciseStatistic extends React.Component {
                 <td>{answer.trajanje}s</td>
             </tr>
         )
-        
+
         return (
-            <Container className="Margin-top">
-                <Table>
+            <Container className="Margin-top d-flex flex-column align-items-center font">
+                <Table className="mt-2">
                     <thead className="thead-light">
                         <tr>
                             <th>PITANJE</th>
@@ -109,13 +109,13 @@ class ExerciseStatistic extends React.Component {
                             <th>VRIJEME (sec)</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody >
                         {listAnswers}
                     </tbody>
+                    <div className="d-flex my-2 align-items-center">
+                        Vrijeme rješavanja vježbe: {this.state.totalTime}s
+                    </div>
                 </Table>
-                <div className="d-flex justify-content-center align-items-center">
-                    Vrijeme rješavanja vježbe: {this.state.totalTime}s
-                </div>
             </Container>
         );
     }

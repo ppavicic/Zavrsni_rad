@@ -89,7 +89,7 @@ class LoginTeacher extends React.Component {
         return (
             <div className=" d-flex flex-column justify-content-center align-items-center" style={background}>
                 <h3 className="font">Prijava</h3>
-                <form onSubmit={this.handleSubmit} className="w-100 container pozadina">
+                <form onSubmit={this.handleSubmit} className="w-100 container font pozadina">
                     <div className="row justify-content-md-center">
                         <div className="form-group col-xl-3">
                             <label>Korisničko ime</label>

@@ -214,15 +214,15 @@ class Exercise extends React.Component {
         //console.log(this.state.minutes, this.state.seconds)
         return (
             <div className="container">
-                <div className="row" style={height15}>
+                <div className="row pozadina font" style={height15}>
                     <div className="col d-flex justify-content-between align-items-center">
-                        <div className="text-light bg-dark">{stud}</div>
-                        <div className="h3">{this.state.naziv}</div>
+                        <div className="">{stud}</div>
+                        <div className="h3 w-50 text-center">{this.state.naziv}</div>
                         {/*<div><Countdown
                             date={Date.now() + 50000}
                             renderer={({ hours, minutes, seconds, completed }) => this.updateTimer(hours, minutes, seconds)} />
-        </div>*/}
-                        <button className="btn btn-danger h-25" onClick={this.handleChange}>QUIT</button>
+                        </div>*/}
+                        <button className="btn btn-danger h-25 py-0" onClick={this.handleChange}>QUIT</button>
                     </div>
                 </div>
                 <div className="row" style={height85}>

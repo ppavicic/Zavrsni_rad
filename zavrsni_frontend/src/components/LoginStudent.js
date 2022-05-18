@@ -20,6 +20,7 @@ class LoginStudent extends React.Component {
             razredi: [],
             ucenici: [],
             err: false,
+            dohvaceno: false,
             loginError: false,
             errorText: ''
         }
@@ -28,7 +29,7 @@ class LoginStudent extends React.Component {
         this.handleClassChange = this.handleClassChange.bind(this)
         this.handleStudentChange = this.handleStudentChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        //this.getExercise = this.getExercise.bind(this)
+        this.getExercise = this.getExercise.bind(this)
         this.changeCurrency = this.changeCurrency.bind(this)
     }
 
@@ -52,7 +53,7 @@ class LoginStudent extends React.Component {
             })
     }
 
-    /*getExercise() {
+    getExercise() {
         axios.get(URL + '/loginStudent/getExercise', { withCredentials: false })
             .then(response => {
                 if (response.data.err !== undefined) {
@@ -68,16 +69,17 @@ class LoginStudent extends React.Component {
                         "naziv": response.data.exercise[0].naziv,
                         "brojRijesenih": 0
                     }
-                    localStorage.setItem('vjezba', JSON.stringify(vjezba))
+                    localStorage.setItem('vjezba2', JSON.stringify(vjezba))
                     this.setState({
                         err: false,
+                        dohvaceno: true
                     })
                 }
             })
             .catch(error => {
                 console.log(error)
             })
-    }*/
+    }
 
     changeCurrency() {
         let vjezba = JSON.parse(localStorage.getItem('vjezba2'))
@@ -89,7 +91,7 @@ class LoginStudent extends React.Component {
                 zadaci[i].pitanje = zadaci[i].pitanje.replaceAll("lp", "c")
                 zadaci[i].pitanje = zadaci[i].pitanje.replaceAll("kuna", "eura")
                 zadaci[i].pitanje = zadaci[i].pitanje.replaceAll("lipa", "centi")
-    
+
                 zadaci[i].tocanodgovor = zadaci[i].tocanodgovor.replaceAll("kn", "eur")
                 zadaci[i].tocanodgovor = zadaci[i].tocanodgovor.replaceAll("lp", "c")
                 zadaci[i].tocanodgovor = zadaci[i].tocanodgovor.replaceAll("kuna", "eura")
@@ -109,6 +111,7 @@ class LoginStudent extends React.Component {
                 }
             }
         }
+
         localStorage.setItem('vjezba', JSON.stringify(vjezba))
     }
 
@@ -244,7 +247,7 @@ class LoginStudent extends React.Component {
         return (
             <div className="d-flex flex-column justify-content-center align-items-center">
                 <h1 className="my-4 font">VJEŽBALICA</h1>
-                <div className="w-50 container d-flex flex-column justify-content-center align-items-center pozadina">
+                <div className="w-50 container d-flex flex-column justify-content-center align-items-center font pozadina">
                     <form onSubmit={this.handleSubmit} className="w-100 container d-flex flex-column justify-content-center align-items-center">
                         <h2 className="pt-1">Škola</h2>
                         <select value={this.state.skola} defaultValue={'default'} name="skola" className="form-select" aria-label="Default select example" onChange={(e) => this.handleSchoolChange(e, 'value')}>

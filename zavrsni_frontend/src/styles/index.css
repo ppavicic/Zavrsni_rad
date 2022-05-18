@@ -1,10 +1,10 @@
 #root{
-    background-color: aliceblue;
+    background-color: beige;
     overflow: auto;
 }
 
 .font{
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: hsl(240, 50%, 57%);
     font-weight: bold;
 }
@@ -18,4 +18,15 @@
 
 .slika{
     background: transparent;
+}
+
+.borderi{
+    border-top: 3px solid hsl(240, 50%, 57%);
+    border-bottom: 3px solid hsl(240, 50%, 57%);
+}
+
+.naslov{
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    color: hsl(240, 50%, 57%);
+    font-weight: bold;
 }

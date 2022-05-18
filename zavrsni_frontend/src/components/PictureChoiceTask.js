@@ -166,9 +166,9 @@ class PictureChoiceTask extends React.Component {
             slikeOdabranogNovca.push(novac.find(element => element.ime == odgovoriKorisnika[i]))
         }
         slikeOdabranogNovca.shift()
-        console.log(odgovoriKorisnika)
+        //console.log(odgovoriKorisnika)
         const chosenMoney = slikeOdabranogNovca.map((n, i) =>
-            <img className="mt-1" key={i} style={imageRender} width="5%" height="30%" src={n.url} alt={n.ime}></img>
+            <img className="mt-1 my-2" key={i} style={imageRender} minwidth="10%" height="35%" src={n.url} alt={n.ime}></img>
         )
         //const novac = this.state.novac
         const moneyList = novac.map((n, i) =>
@@ -177,22 +177,22 @@ class PictureChoiceTask extends React.Component {
             </div>
         )
         return (
-            <div className="h-100 d-flex flex-column py-1" >
-                <div className="h-25 py-3 px-5 border border-secondary text-white bg-secondary bg-gradient d-flex flex-column justify-content-around align-items-center">
-                    <p>{vjezba.brojRijesenih + 1}. {this.state.pitanje}</p>
+            <div className="h-100 d-flex flex-column py-1 px-0" >
+                <div className="h-25 px-5 pozadina font d-flex flex-column justify-content-around align-items-center">
+                    <div>{vjezba.brojRijesenih + 1}. {this.state.pitanje}</div>
                     <div className="my-3">
-                        <button className="btn btn-outline-warning btn-sm mx-3" data-toggle="button" aria-pressed="false" autoComplete="off" onClick={this.showHint}>HINT</button>
+                        <button className="btn btn-warning btn-sm mx-3" data-toggle="button" aria-pressed="false" autoComplete="off" onClick={this.showHint}>HINT</button>
                         {this.state.showHint && this.state.hint}
                     </div>
                 </div>
-                <form onSubmit={this.handleSubmit} className="w-100 h-75 d-flex flex-column border border-secondary justify-content-center align-items-center">
+                <form onSubmit={this.handleSubmit} className="w-100 h-75 d-flex flex-column pozadina bg-white border-top-0 justify-content-center align-items-center">
                     <div className="h-75 w-100 d-flex flex-wrap" style={{ overflow: `auto` }}>
                         {moneyList}
                     </div>
                     {this.state.taskError && !this.state.taskSucces && <Alert style={zindex} className="alert-dismissible fade show" variant={'danger'}>{this.state.errorText}</Alert>}
                     {this.state.taskSucces && <div style={zindex}><Alert className="alert-dismissible fade show" variant={'success'}>Točan odgovor!</Alert></div>}
-                    <div className="h-25 w-100 bg-secondary d-flex flex-column bg-gradient justify-content-between align-items-center">
-                        <div className="w-100 h-50 bg-white border border-primary">
+                    <div className="h-25 w-100 pozadina border-0 font d-flex flex-column justify-content-between align-items-center">
+                        <div className="w-100 h-50 bg-white borderi">
                             Odabrano: {chosenMoney}
                         </div>
                         <button type="submit" className="btn btn-primary my-1">Odgovori</button>

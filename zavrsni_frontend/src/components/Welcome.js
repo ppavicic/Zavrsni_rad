@@ -21,6 +21,10 @@ class Welcome extends React.Component {
         this.getExercise = this.getExercise.bind(this)
     }
 
+    componentDidMount() {
+        this.getExercise()
+    }
+
     login() {
         this.setState({
             loginRedirect: true
@@ -37,10 +41,10 @@ class Welcome extends React.Component {
         axios.get(URL + '/loginStudent/getExercise', { withCredentials: false })
             .then(response => {
                 if (response.data.err !== undefined) {
-                    /*this.setState({
+                    this.setState({
                         err: true,
                         errorText: response.data.exerciseError
-                    })*/
+                    })
                 } else {
                     const vjezba = {
                         "idvjezbe": response.data.exercise[0].idgrupe,
@@ -50,9 +54,9 @@ class Welcome extends React.Component {
                         "brojRijesenih": 0
                     }
                     localStorage.setItem('vjezba2', JSON.stringify(vjezba))
-                    /*this.setState({
+                    this.setState({
                         err: false,
-                    })*/
+                    })
                 }
             })
             .catch(error => {
@@ -78,15 +82,14 @@ class Welcome extends React.Component {
                 return <Navigate to='/' />
             }
         }
-
+        //<img className='mt-5 w-50 h-25 slika' src={image}></img>
         return (
             <div className='d-flex flex-column align-items-center'>
-                <h1 className='container text-center py-2 font'>DOBRODOŠLI NA VJEŽBALICU!</h1>
-                <div className='w-25 container text-center pozadina'>Za početak vježbe pritisni START</div>
-                {/*<img className='mt-5 w-50 h-25 slika' src={image}></img>*/}
-                <div className='container mt-5 w-50 d-flex flex-column justify-content-center align-items-center pozadina'>
+                <h1 className='container text-center py-2 naslov'>DOBRODOŠLI NA VJEŽBALICU!</h1>
+                <div className='w-25 container text-center font pozadina'>Za početak vježbe pritisni START</div>
+                <div className='container mt-5 w-50 d-flex flex-column justify-content-center align-items-center font pozadina'>
                     <div className='mt-2'>
-                        <Link to="/loginStudent" className="btn btn-primary btn-lg" onClick={this.getExercise}>START</Link>
+                        <Link to="/loginStudent" className="btn btn-primary btn-lg">START</Link>
                     </div>
                     <div className="mt-1">
                         <span className=''>Učitelj/ica? </span> <Link to="/loginTeacher">Prijavi se!</Link>

@@ -226,8 +226,8 @@ class TeacherProfile extends React.Component {
                 }
                 <hr />
                 <h3 className="text-center font">Vježbe</h3>
-                <Table className="table-hover">
-                    <thead className="font">
+                <Table className="table-hover font">
+                    <thead>
                         <tr>
                             <th>ID</th>
                             <th className="w-25">Naziv</th>
@@ -244,8 +244,8 @@ class TeacherProfile extends React.Component {
                 </Table>
                 <br />
                 <h3 className="text-center font">Zadaci</h3>
-                <Table className="table-hover">
-                    <thead className="font">
+                <Table className="table-hover font">
+                    <thead>
                         <tr>
                             <th>ID</th>
                             <th>Vrsta</th>
@@ -261,8 +261,8 @@ class TeacherProfile extends React.Component {
                 </Table>
                 <br />
                 <h3 className="text-center font">Moji učenici</h3>
-                <Table className="table-hover">
-                    <thead className="font">
+                <Table className="table-hover font">
+                    <thead>
                         <tr>
                             <th>ID</th>
                             <th>Ime</th>

@@ -94,10 +94,10 @@ class Statistics extends React.Component {
         var stud = student.map(s => s.ime + " " + s.prezime)
 
         return (
-            <Container className="Margin-top">
-                <div className="mb-4 pt-4 d-flex justify-content-center">Statistika za učenika: {stud}</div>
-                {!this.state.error && <Table className="table-hover">
-                    <thead>
+            <Container className="Margin-top d-flex flex-column align-items-center overflow-auto">
+                <div className="my-4 w-75 d-flex justify-content-center align-items-center font pozadina">Statistika za učenika: {stud}</div>
+                {!this.state.error && <Table className="table-hover font">
+                    <thead className="font">
                         <tr>
                             <th>ID vježbe</th>
                             <th>Naziv vježbe</th>

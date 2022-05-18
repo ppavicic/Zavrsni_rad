@@ -93,18 +93,18 @@ class InputTask extends React.Component {
         }
         
         return (
-            <div className="h-100 d-flex flex-column py-1">
-                <div className="h-50 pt-3 px-5 border border-secondary text-white bg-secondary bg-gradient d-flex flex-column justify-content-around align-items-center">
+            <div className="h-100 d-flex flex-column py-1 px-0">
+                <div className="h-25 pt-3 px-5 font pozadina d-flex flex-column justify-content-around align-items-center">
                     <p>{vjezba.brojRijesenih+1}. {this.state.pitanje}</p>
                     <div className="my-3">
-                        <button className="btn btn-outline-warning btn-sm mx-3" data-toggle="button" aria-pressed="false" autoComplete="off" onClick={this.showHint}>HINT</button>
+                        <button className="btn btn-warning btn-sm mx-3" data-toggle="button" aria-pressed="false" autoComplete="off" onClick={this.showHint}>HINT</button>
                         {this.state.showHint && this.state.hint}
                     </div>
                 </div>
-                <div className="h-50 !important border border-secondary d-flex flex-column justify-content-center align-items-center">
+                <div className="h-50 !important pozadina border-top-0 bg-white d-flex flex-column justify-content-center align-items-center">
                     {this.state.taskError && !this.state.taskSucces && <div style={zindex}><Alert className="alert-dismissible fade show" variant={'danger'}>{this.state.errorText}</Alert></div>}
                     {this.state.taskSucces && <div style={zindex}><Alert className="alert-dismissible fade show" variant={'success'}>Točan odgovor!</Alert></div>}
-                    <form onSubmit={this.handleSubmit} className="w-75 h-25 bg-secondary bg-gradient d-flex justify-content-center align-items-center">
+                    <form onSubmit={this.handleSubmit} className="w-75 h-25 pozadina d-flex justify-content-center align-items-center">
                         <div className="input-group my-2 mx-2">
                             <input name="odgovorKorisnika" value={this.state.odgovorKorisnika} type="text" className="form-control" placeholder="Enter answer"
                                 aria-label="Enter answer" aria-describedby="basic-addon2" onChange={this.handleChange}></input>
