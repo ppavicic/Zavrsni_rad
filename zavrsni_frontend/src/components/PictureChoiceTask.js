@@ -15,6 +15,7 @@ class PictureChoiceTask extends React.Component {
             hint: this.props.hint,
             idzadatka: this.props.idzadatka,
             tipNovca: this.props.tipNovca,
+            valuta: this.props.valuta,
             odgovorKorisnika: "",
             novac: [],
             showHint: false,
@@ -59,10 +60,18 @@ class PictureChoiceTask extends React.Component {
         let odgovorKorisnika = this.state.odgovorKorisnika.toLowerCase()
         let dijelovi = odgovorKorisnika.split(',')
         for (let i = 1; i < dijelovi.length; i++) {
-            if (dijelovi[i].slice(-2) == 'lp') {
-                dijelovi[i] = parseInt(dijelovi[i].substring(0, dijelovi[i].length - 2)) / 100
+            if (this.state.valuta == 'EURO') {
+                if (dijelovi[i].slice(-1) == 'c') {
+                    dijelovi[i] = parseFloat(dijelovi[i].substring(0, dijelovi[i].length - 1)) / 100.0
+                } else {
+                    dijelovi[i] = parseFloat(dijelovi[i].substring(0, dijelovi[i].length - 2))
+                }
             } else {
-                dijelovi[i] = parseInt(dijelovi[i].substring(0, dijelovi[i].length - 2))
+                if (dijelovi[i].slice(-2) == 'lp') {
+                    dijelovi[i] = parseInt(dijelovi[i].substring(0, dijelovi[i].length - 2)) / 100.0
+                } else {
+                    dijelovi[i] = parseInt(dijelovi[i].substring(0, dijelovi[i].length - 2))
+                }
             }
         }
         dijelovi.shift()
@@ -71,12 +80,13 @@ class PictureChoiceTask extends React.Component {
             ukupno += dijelovi[j]
         }
 
+        ukupno = ukupno.toFixed(2)
         let vjezba = JSON.parse(localStorage.getItem('vjezba'))
-        if (ukupno % 1 == 0) {
+        if (ukupno % 1 == 0.0) {
             if (vjezba.valuta.trim() === "EURO") {
-                ukupno = ukupno.toString() + "eur"
+                ukupno = Math.round(ukupno).toString() + "eur"
             } else {
-                ukupno = ukupno.toString() + "kn"
+                ukupno = Math.round(ukupno).toString() + "kn"
             }
         } else {
             if (vjezba.valuta.trim() === "EURO") {
@@ -88,6 +98,7 @@ class PictureChoiceTask extends React.Component {
             }
         }
 
+        console.log(tocan, ukupno)
         this.sendLog(ukupno)
         if (tocan !== ukupno) {
             this.setState({

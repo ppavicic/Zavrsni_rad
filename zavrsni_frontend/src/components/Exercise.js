@@ -121,6 +121,7 @@ class Exercise extends React.Component {
     }
 
     renderTask() {
+        let vjezba = JSON.parse(localStorage.getItem('vjezba'))
         let task = this.state.currentTask
         if (task.vrsta === 'slikovnoUnos')
             return (
@@ -168,6 +169,7 @@ class Exercise extends React.Component {
                     idzadatka={task.idzad}
                     hint={task.hint}
                     tipNovca={task.tipnovca}
+                    valuta={vjezba.valuta}
                     next={this.nextTask}
                 />
             )

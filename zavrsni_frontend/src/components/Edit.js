@@ -86,6 +86,7 @@ class Edit extends React.Component {
                 idzadataka: this.state.idzadataka,
             }
         }
+        console.log(data)
         axios.post(URL + '/teacherProfile/edit', data, { withCredentials: false })
             .then(response => {
                 if (response.data.updateError === undefined) {
