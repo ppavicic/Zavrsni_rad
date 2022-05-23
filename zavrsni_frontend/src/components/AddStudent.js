@@ -1,8 +1,7 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Navigate } from 'react-router-dom'
-import Image from '../images/money.jpg';
-import { Table, Alert } from 'react-bootstrap'
+import { Alert } from 'react-bootstrap'
 import axios from 'axios'
 import { URL } from './Constants'
 axios.defaults.withCredentials = true;
@@ -90,13 +89,6 @@ class AddStudent extends React.Component {
         if (this.state.back)
             return <Navigate to='/teacherProfile' />
 
-        var background = {
-            backgroundImage: `url()`,
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat'
-        }
-
         const razredi = this.state.razredi
         const classesList = razredi.map((razred, i) => {
             return (
@@ -107,25 +99,25 @@ class AddStudent extends React.Component {
         classesList.push(<option disabled key={-1} value={"default"}>Odaberi razred</option>)
 
         return (
-            <div className="d-flex flex-column justify-content-center align-items-center" style={background}>
+            <div className="d-flex flex-column justify-content-center align-items-center">
                 <h3 className="text-center font">Dodaj učenika</h3>
                 <form onSubmit={this.handleSubmit} className="w-100 container pozadina">
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-xl-3">
+                        <div className="form-group">
                             <label>Ime</label>
                             <input type="text" name="ime" value={this.state.ime} className="form-control" placeholder="Enter name" onChange={this.handleChange} required />
                         </div>
                     </div>
 
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-xl-3">
+                        <div className="form-group">
                             <label>Prezime</label>
                             <input type="text" name="prezime" value={this.state.prezime} className="form-control" placeholder="Enter surname" onChange={this.handleChange} required />
                         </div>
                     </div>
 
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-xl-3">
+                        <div className="form-group">
                             <label>Razred</label>
                             <select  defaultValue={'default'} name="idRazreda" className="form-select" aria-label="Default select example" onChange={(e) => this.handleChange(e, 'value')}>
                                 {classesList}

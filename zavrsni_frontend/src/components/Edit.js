@@ -1,7 +1,6 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Navigate } from 'react-router-dom'
-import Image from '../images/money.jpg';
 import axios from 'axios'
 import { Alert } from 'react-bootstrap'
 import { URL } from './Constants'
@@ -193,12 +192,6 @@ class Edit extends React.Component {
             return <Navigate to='/teacherProfile' />
         }
 
-        var background = {
-            backgroundImage: `url()`,
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat'
-        }
         const student = this.state.student
         this.state.studentIdPlaceholder = student.map(student => student.iducenika)
         const studentFirstNamePlaceholder = student.map(student => student.ime)
@@ -214,7 +207,6 @@ class Edit extends React.Component {
         const taskSecondPlaceholder = task.map(task => task.drugiodgovor)
         const taskThirdPlaceholder = task.map(task => task.treciodgovor)
         const taskFourthPlaceholder = task.map(task => task.cetvrtiodgovor)
-        const taskMoneyTypePlaceholder = task.map(task => task.tipnovca)
 
         const exercise = this.state.exercise
         this.state.exerciseIdPlaceholder = exercise.map(exercise => exercise.idgrupe)
@@ -255,14 +247,14 @@ class Edit extends React.Component {
                         <p className="text-center font">ID UČENIKA: {this.state.studentIdPlaceholder} | IME: {studentFirstNamePlaceholder} | PREZIME: {studentLastNamePlaceholder}</p>
                         <form onSubmit={this.handleSubmit} className="w-100 container pozadina">
                             <div className="row justify-content-md-center">
-                                <div className="form-group col-xl-3">
+                                <div className="form-group">
                                     <label>Ime</label>
                                     <input type="text" required name="ime" value={this.state.ime} className="form-control" placeholder={studentFirstNamePlaceholder} onChange={this.handleChange} />
                                 </div>
                             </div>
 
                             <div className="row justify-content-md-center">
-                                <div className="form-group col-xl-3">
+                                <div className="form-group">
                                     <label>Prezime</label>
                                     <input type="text" required name="prezime" value={this.state.prezime} className="form-control" placeholder={studentLastNamePlaceholder} onChange={this.handleChange} />
                                 </div>
@@ -279,8 +271,8 @@ class Edit extends React.Component {
                         <div className="d-flex justify-content-center font">
                             <h3 className="text-center w-25 pozadina">Uredi zadatak</h3>
                         </div>
-                        <p className="text-center font">ID: {this.state.taskIdPlaceholder} | VRSTA: {this.state.taskTypePlaceholder} | PITANJE: {taskQuestionPlaceholder}</p>
-                        <p className="text-center font">TOČAN ODGOVOR: {taskCorrectAnswerPlaceholder} | HINT: {taskHintPlaceholder}</p>
+                        <p className="text-center font mx-1">ID: {this.state.taskIdPlaceholder} | VRSTA: {this.state.taskTypePlaceholder} | PITANJE: {taskQuestionPlaceholder}</p>
+                        <p className="text-center font mx-1">TOČAN ODGOVOR: {taskCorrectAnswerPlaceholder} | HINT: {taskHintPlaceholder}</p>
                         <form onSubmit={this.handleSubmit} className="w-100 container pozadina my-2">
                             {this.state.taskTypePlaceholder == "slikovnoOdabir" &&
                                 <p className="text-center font">
@@ -364,18 +356,18 @@ class Edit extends React.Component {
                         <div className="d-flex justify-content-center font">
                             <h3 className="text-center w-25 pozadina">Uredi vježbu</h3>
                         </div>
-                        <p className="text-center font">ID: {this.state.exerciseIdPlaceholder} | NAZIV: {exerciseNamePlaceholder} | NAMJENA: {exercisePurposePlaceholder}</p>
-                        <p className="text-center font">VALUTA: {exerciseCurrencyPlaceholder} | POKRENI: {exerciseStartPlaceholder} | ZADACI: {exerciseTasksPlaceholder}</p>
+                        <p className="text-center font mx-1">ID: {this.state.exerciseIdPlaceholder} | NAZIV: {exerciseNamePlaceholder} | NAMJENA: {exercisePurposePlaceholder}</p>
+                        <p className="text-center font mx-1">VALUTA: {exerciseCurrencyPlaceholder} | POKRENI: {exerciseStartPlaceholder} | ZADACI: {exerciseTasksPlaceholder}</p>
                         <form onSubmit={this.handleSubmit} className="w-100 container pozadina">
                             <div className="row justify-content-md-center">
-                                <div className="form-group col-xl-4">
+                                <div className="form-group">
                                     <label>Naziv vježbe</label>
                                     <input type="text" required name="naziv" value={this.state.naziv} className="form-control" placeholder={exerciseNamePlaceholder} onChange={this.handleChange} />
                                 </div>
                             </div>
 
                             <div className="row justify-content-md-center">
-                                <div className="form-group col-xl-4">
+                                <div className="form-group">
                                     <label>Namjena</label>
                                     <select required defaultValue={'default'} name="namjena" className="form-select" aria-label="Default select example" onChange={(e) => this.handleChange(e, 'value')}>
                                         {purpose}
@@ -384,7 +376,7 @@ class Edit extends React.Component {
                             </div>
 
                             <div className="row justify-content-md-center">
-                                <div className="form-group col-xl-4">
+                                <div className="form-group">
                                     <label>Valuta u zadacima</label>
                                     <select required defaultValue={'default'} name="valuta" className="form-select" aria-label="Default select example" onChange={(e) => this.handleChange(e, 'value')}>
                                         {currency}
@@ -393,7 +385,7 @@ class Edit extends React.Component {
                             </div>
 
                             <div className="row justify-content-md-center">
-                                <div className="form-group col-xl-4">
+                                <div className="form-group">
                                     <label>Odabrat vježbu za rješavanje? (1-DA, 0-NE)</label>
                                     <select required defaultValue={'default'} name="pokreni" className="form-select" aria-label="Default select example" onChange={(e) => this.handleChange(e, 'value')}>
                                         {choose}
@@ -402,7 +394,7 @@ class Edit extends React.Component {
                             </div>
 
                             <div className="row justify-content-md-center">
-                                <div className="form-group col-xl-4">
+                                <div className="form-group">
                                     <label>Unesite ID zadataka koje želite u vježbi odvojene sa ","</label>
                                     <input type="text" required name="idzadataka" value={this.state.idzadataka} className="form-control" placeholder={exerciseTasksPlaceholder} onChange={this.handleChange} />
                                 </div>

@@ -1,9 +1,8 @@
 import React from 'react'
 import image from '../images/monopoly.png'
 import '../styles/index.css'
-import { Button } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Navigate, Redirect, Link } from 'react-router-dom'
+import { Navigate, Link } from 'react-router-dom'
 import { URL } from './Constants'
 import axios from 'axios'
 axios.defaults.withCredentials = true;
@@ -82,12 +81,19 @@ class Welcome extends React.Component {
                 return <Navigate to='/' />
             }
         }
-        //<img className='mt-5 w-50 h-25 slika' src={image}></img>
+        var imageRender = {
+            imageRendering: `-webkit-optimize-contrast`,
+            maxWidth: `100%`,
+            maxHeight: `100%`
+        }
         return (
             <div className='d-flex flex-column align-items-center'>
                 <h1 className='container text-center py-2 naslov'>DOBRODOŠLI NA VJEŽBALICU!</h1>
                 <div className='w-25 container text-center font pozadina'>Za početak vježbe pritisni START</div>
-                <div className='container mt-5 w-50 d-flex flex-column justify-content-center align-items-center font pozadina'>
+                <div className='my-2 w-50 h-25 d-flex justify-content-center'>
+                    <img alt='monopoly guy' style={imageRender} src={image}></img>
+                </div>
+                <div className='container mt-2 w-50 d-flex flex-column justify-content-center align-items-center font pozadina'>
                     <div className='mt-2'>
                         <Link to="/loginStudent" className="btn btn-primary btn-lg">START</Link>
                     </div>

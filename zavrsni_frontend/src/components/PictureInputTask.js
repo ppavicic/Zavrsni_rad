@@ -1,6 +1,5 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Image from '../images/money.jpg';
 import '../styles/login.css'
 import { Alert } from 'react-bootstrap'
 import axios from 'axios'

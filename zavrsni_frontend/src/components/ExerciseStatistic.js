@@ -1,8 +1,6 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Navigate } from 'react-router-dom'
-import { Table, Button, Container } from 'react-bootstrap'
-import Image from '../images/money.jpg';
+import { Table, Container } from 'react-bootstrap'
 import axios from 'axios'
 import { URL } from './Constants'
 axios.defaults.withCredentials = true;

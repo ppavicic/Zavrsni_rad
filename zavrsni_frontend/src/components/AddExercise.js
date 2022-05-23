@@ -2,7 +2,6 @@ import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Navigate } from 'react-router-dom'
 import { Alert } from 'react-bootstrap'
-import Image from '../images/money.jpg';
 import axios from 'axios'
 import { URL } from './Constants'
 axios.defaults.withCredentials = true;
@@ -69,12 +68,6 @@ class AddExercise extends React.Component {
         if (this.state.back)
             return <Navigate to='/teacherProfile' />
 
-        var background = {
-            backgroundImage: `url()`,
-            backgroundPosition: 'center',
-            backgroundSize: '100% ',
-            backgroundRepeat: 'no-repeat'
-        }
         const purpose = []
         purpose.push(<option key={0} value={'ISPIT'}>ISPIT</option>)
         purpose.push(<option key={1} value={'VJEZBA'}>VJEŽBA</option>)
@@ -91,18 +84,18 @@ class AddExercise extends React.Component {
         choose.push(<option disabled key={2} value={'default'}>Odaberi DA ili NE</option>)
 
         return (
-            <div className="d-flex flex-column justify-content-center align-items-center" style={background}>
+            <div className="d-flex flex-column justify-content-center align-items-center">
                 <h3 className="text-center font">Dodaj vježbu</h3>
                 <form onSubmit={this.handleSubmit} className="w-100 container pozadina">
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-xl-4">
+                        <div className="form-group">
                             <label>Naziv vježbe</label>
                             <input type="text" name="naziv" value={this.state.naziv} className="form-control" placeholder="Enter name" onChange={this.handleChange} />
                         </div>
                     </div>
 
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-xl-4">
+                        <div className="form-group">
                             <label>Namjena</label>
                             <select defaultValue={'default'} name="namjena" className="form-select" aria-label="Default select example" onChange={(e) => this.handleChange(e, 'value')}>
                                 {purpose}
@@ -111,7 +104,7 @@ class AddExercise extends React.Component {
                     </div>
 
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-xl-4">
+                        <div className="form-group">
                             <label>Valuta u zadacima</label>
                             <select defaultValue={'default'} name="valuta" className="form-select" aria-label="Default select example" onChange={(e) => this.handleChange(e, 'value')}>
                                 {currency}
@@ -120,7 +113,7 @@ class AddExercise extends React.Component {
                     </div>
 
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-xl-4">
+                        <div className="form-group">
                             <label>Odabrat ovu vježbu za rješavanje?</label>
                             <select defaultValue={'default'} name="pokreni" className="form-select" aria-label="Default select example" onChange={(e) => this.handleChange(e, 'value')}>
                                 {choose}
@@ -129,7 +122,7 @@ class AddExercise extends React.Component {
                     </div>
 
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-xl-4">
+                        <div className="form-group">
                             <label>Unesite ID zadataka koje želite u vježbi odvojene sa ","</label>
                             <input type="text" name="idzadataka" value={this.state.idzadataka} className="form-control" placeholder="1,2,3" onChange={this.handleChange} />
                         </div>

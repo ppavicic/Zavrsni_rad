@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/login.css'
 import { Navigate } from 'react-router-dom'
 import { Alert } from 'react-bootstrap'
-import Image from '../images/money.jpg';
 import axios from 'axios'
 import { URL } from './Constants'
 axios.defaults.withCredentials = true;
@@ -90,13 +89,6 @@ class AddTask extends React.Component {
         if (this.state.back)
             return <Navigate to='/teacherProfile' />
 
-        var background = {
-            backgroundImage: `url()`,
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat'
-        }
-
         const typeOfMoney = []
         typeOfMoney.push(<option key={0} value={'NOVCANICA'}>NOVČANICA</option>)
         typeOfMoney.push(<option key={1} value={'KOVANICA'}>KOVANICA</option>)
@@ -104,11 +96,11 @@ class AddTask extends React.Component {
         typeOfMoney.push(<option disabled key={3} value={'default'}>Odaberi tip novca</option>)
 
         return (
-            <div className="d-flex flex-column justify-content-center align-items-center" style={background}>
+            <div className="d-flex flex-column justify-content-center align-items-center">
                 <h3 className="font text-center">Dodaj zadatak</h3>
                 <form onSubmit={this.handleSubmit} className="w-100 container pozadina">
                     <div className="row justify-content-center">
-                        <div className="form-group col-lg-3">
+                        <div className="form-group col-sm-3">
                             <label>ID zadatka:</label>
                             <input type="text" name="id" value={this.state.id} className="form-control" placeholder="Enter task ID" onChange={this.handleChange} required />
                         </div>

@@ -1,7 +1,6 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Image from '../images/money.jpg';
-import { Alert, Button } from 'react-bootstrap'
+import { Alert } from 'react-bootstrap'
 import axios from 'axios'
 import { URL } from './Constants'
 axios.defaults.withCredentials = true;
@@ -60,7 +59,7 @@ class MultipleChoiceTask extends React.Component {
     handleChange(event){
         const { name, value } = event.target
         this.setState({
-            [name]: value,
+            [name]: value
         })
     }
 

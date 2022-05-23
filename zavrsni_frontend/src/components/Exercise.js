@@ -1,6 +1,5 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Image from '../images/money.jpg';
 import { Navigate } from 'react-router-dom'
 import Countdown from 'react-countdown';
 import axios from 'axios'

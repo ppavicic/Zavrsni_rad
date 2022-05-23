@@ -1,7 +1,6 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/login.css'
-import Image from '../images/money.jpg';
 import { Navigate } from 'react-router-dom'
 import { Alert } from 'react-bootstrap'
 import axios from 'axios'
@@ -79,26 +78,20 @@ class LoginTeacher extends React.Component {
                 return <Navigate to='/' />
             }
         }
-
-        var background = {
-            backgroundImage: `url()`,
-            backgroundPosition: 'center',
-            backgroundSize: '100% ',
-            backgroundRepeat: 'no-repeat'
-        }
+        
         return (
-            <div className=" d-flex flex-column justify-content-center align-items-center" style={background}>
+            <div className=" d-flex flex-column justify-content-center align-items-center">
                 <h3 className="font">Prijava</h3>
                 <form onSubmit={this.handleSubmit} className="w-100 container font pozadina">
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-xl-3">
+                        <div className="form-group">
                             <label>Korisničko ime</label>
                             <input type="text" name="username" value={this.state.username} className="form-control w-100" placeholder="Enter username" onChange={this.handleChange} />
                         </div>
                     </div>
 
                     <div className="row justify-content-md-center">
-                        <div className="form-group col-xl-3">
+                        <div className="form-group">
                             <label>Lozinka</label>
                             <input type="password" name="lozinka" value={this.state.lozinka} className="form-control" placeholder="Enter password" onChange={this.handleChange} />
                         </div>
