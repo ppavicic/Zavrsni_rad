@@ -47,7 +47,7 @@ class ExerciseStatistic extends React.Component {
     }
 
     getColor(tocanodgovor, odgovorKorisnika) {
-        if (tocanodgovor == odgovorKorisnika) {
+        if (tocanodgovor == odgovorKorisnika.toLowerCase()) {
             return 'table-success'
         } else {
             return 'table-danger'
@@ -87,11 +87,12 @@ class ExerciseStatistic extends React.Component {
         const answers = this.state.answers
         let i = 0
 
+        console.log()
         const listAnswers = answers.map(answer =>
             <tr key={i++} className={this.getColor(answer.tocan, answer.odgovor)}>
                 <td>{answer.pitanje}</td>
                 <td>{answer.tocan}</td>
-                <td>{answer.odgovor}</td>
+                <td>{answer.odgovor.toLowerCase()}</td>
                 <td>{answer.trajanje}s</td>
             </tr>
         )
