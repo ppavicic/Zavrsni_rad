@@ -1,9 +1,10 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Navigate } from 'react-router-dom'
-import { Alert } from 'react-bootstrap'
+import { Alert, Button } from 'react-bootstrap'
 import axios from 'axios'
 import { URL } from './Constants'
+import Popup from "./Popup";
 axios.defaults.withCredentials = true;
 
 class AddExercise extends React.Component {
@@ -17,23 +18,57 @@ class AddExercise extends React.Component {
             idzadataka: "",
             back: false,
             addingError: false,
-            errorText: ""
+            errorText: "",
+            showPopup: false,
+            tasks: [],
+            checked: {}
         }
         this.return = this.return.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleClose = this.handleClose.bind(this)
+        this.toggleTasks = this.toggleTasks.bind(this)
+        this.getTasks = this.getTasks.bind(this)
+    }
+
+    componentDidMount() {
+        this.getTasks()
+    }
+
+    getTasks() {
+        axios.get(URL + '/teacherProfile/getTasks', { withCredentials: false })
+            .then(response => {
+                var zadaci = {}
+                for (let i = 0; i < response.data.tasks.length; i++) {
+                    zadaci[response.data.tasks[i].idzad] = false
+                }
+                this.setState({
+                    tasks: response.data.tasks,
+                    checked: zadaci
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
     async handleSubmit(event) {
         event.preventDefault()
+        var odabraniZadaci = this.state.checked
+        var idzadataka = ""
+        for(var key in odabraniZadaci){
+            if(odabraniZadaci[key] === true){
+                idzadataka = idzadataka + key + ","
+            }
+        }
+        idzadataka = idzadataka.slice(0, -1) //ukloni zadnji zarez
         let exercise = {
             naziv: this.state.naziv,
             namjena: this.state.namjena,
             valuta: this.state.valuta,
             pokreni: this.state.pokreni,
-            idzadataka: this.state.idzadataka
+            idzadataka: idzadataka
         }
-        console.log(exercise)
         axios.post(URL + '/teacherProfile/addExercise', exercise, { withCredentials: false })
             .then(response => {
                 if (response.data.addingError === undefined) {
@@ -56,6 +91,22 @@ class AddExercise extends React.Component {
         this.setState({
             [name]: value,
         })
+    }
+
+    handleClose() {
+        this.setState({
+            showPopup: !this.state.showPopup
+        });
+    }
+
+    toggleTasks(event) {
+        var newChecked = {...this.state.checked}
+        newChecked[event.target.value] = (newChecked[event.target.value] === true) ? false : true
+        this.setState({
+            checked: newChecked
+        }, function () {
+            //console.log(this.state.checked);
+        });
     }
 
     return() {
@@ -82,6 +133,15 @@ class AddExercise extends React.Component {
         choose.push(<option key={0} value={'1'}>DA</option>)
         choose.push(<option key={1} value={'0'}>NE</option>)
         choose.push(<option disabled key={2} value={'default'}>Odaberi DA ili NE</option>)
+
+        const tasks = this.state.tasks
+        let i = 0
+        const listTasks = tasks.map(task =>
+            <li key={i++} className="d-flex align-items-start">
+                <input className="mt-2" type="checkbox" defaultChecked={this.state.checked[task.idzad]} id={task.idzad} name={task.idzad} value={task.idzad} onChange={(e) => this.toggleTasks(e)} />
+                <label className="labelWidth" htmlFor={task.idzad}>{task.pitanje}<span className="font"> |ODGOVOR: {task.tocanodgovor}</span></label>
+            </li>
+        )
 
         return (
             <div className="d-flex flex-column justify-content-center align-items-center">
@@ -122,9 +182,21 @@ class AddExercise extends React.Component {
                     </div>
 
                     <div className="row justify-content-md-center">
-                        <div className="form-group">
-                            <label>Unesite ID zadataka koje želite u vježbi odvojene sa ","</label>
-                            <input type="text" name="idzadataka" value={this.state.idzadataka} className="form-control" placeholder="1,2,3" onChange={this.handleChange} />
+                        <div className="form-group mt-3">
+                            <label>Odaberite zadatke koje želite da se rješavaju u vježbi:</label>
+                            <Button variant="btn btn-primary" className="mx-2" onClick={this.handleClose}>Odaberi</Button>
+                            {this.state.showPopup && <Popup
+                                content={
+                                    <div className="d-flex flex-column justify-content-center align-items-center">
+                                        <h3>Označite zadatke koje želite u vježbi</h3>
+                                        <hr/>
+                                        <ul>
+                                            {listTasks}
+                                        </ul>
+                                    </div>
+                                }
+                                handleClose={this.handleClose}
+                            />}
                         </div>
                     </div>
 
@@ -134,7 +206,7 @@ class AddExercise extends React.Component {
                     </div>
                 </form>
                 {this.state.addingError &&
-                    <div className="mt-3"><Alert className="alert-dismissible" variant={'danger'}>{this.state.errorText}</Alert></div>}
+                    <div className="mt-3 mx-5"><Alert className="alert-dismissible" variant={'danger'}>{this.state.errorText}</Alert></div>}
             </div>
         );
     }

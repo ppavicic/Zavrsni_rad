@@ -2,8 +2,9 @@ import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Navigate } from 'react-router-dom'
 import axios from 'axios'
-import { Alert } from 'react-bootstrap'
+import { Alert, Button } from 'react-bootstrap'
 import { URL } from './Constants'
+import Popup from "./Popup";
 axios.defaults.withCredentials = true;
 
 class Edit extends React.Component {
@@ -40,7 +41,10 @@ class Edit extends React.Component {
             showVjezba: false,
             showZadatak: false,
             updateError: false,
-            errorText: ""
+            errorText: "",
+            tasks: [],
+            showPopup: false,
+            checked: {}
         }
         this.return = this.return.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -48,6 +52,9 @@ class Edit extends React.Component {
         this.getZadatak = this.getZadatak.bind(this)
         this.getVjezba = this.getVjezba.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleClose = this.handleClose.bind(this)
+        this.toggleTasks = this.toggleTasks.bind(this)
+        this.getTasks = this.getTasks.bind(this)
     }
 
     async handleSubmit(event) {
@@ -75,6 +82,14 @@ class Edit extends React.Component {
                 novacZaPrikaz: this.state.novacZaPrikaz
             }
         } else if (this.state.showVjezba) {
+            var odabraniZadaci = this.state.checked
+            var idzadataka = ""
+            for(var key in odabraniZadaci){
+                if(odabraniZadaci[key] === true){
+                    idzadataka = idzadataka + key + ","
+                }
+            }
+            idzadataka = idzadataka.slice(0, -1) //ukloni zadnji zarez
             data = {
                 data: "vjezba",
                 id: this.state.exerciseIdPlaceholder,
@@ -82,7 +97,7 @@ class Edit extends React.Component {
                 namjena: this.state.namjena,
                 valuta: this.state.valuta,
                 pokreni: this.state.pokreni,
-                idzadataka: this.state.idzadataka,
+                idzadataka: idzadataka
             }
         }
         console.log(data)
@@ -120,6 +135,7 @@ class Edit extends React.Component {
                 showVjezba: true
             })
             this.getVjezba(identifikator)
+            this.getTasks()
         }
         else if (form === 'zadatak') {
             this.setState({
@@ -128,6 +144,40 @@ class Edit extends React.Component {
             this.getZadatak(identifikator)
         }
     }
+
+    handleClose() {
+        this.setState({
+            showPopup: !this.state.showPopup
+        });
+    }
+
+    getTasks() {
+        axios.get(URL + '/teacherProfile/getTasks', { withCredentials: false })
+            .then(response => {
+                var zadaci = {}
+                for (let i = 0; i < response.data.tasks.length; i++) {
+                    zadaci[response.data.tasks[i].idzad] = false
+                }
+                this.setState({
+                    tasks: response.data.tasks,
+                    checked: zadaci
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    toggleTasks(event) {
+        var newChecked = {...this.state.checked}
+        newChecked[event.target.value] = (newChecked[event.target.value] === true) ? false : true
+        this.setState({
+            checked: newChecked
+        }, function () {
+            //console.log(this.state.checked);
+        });
+    }
+
     getVjezba(identifikator) {
         let exercise = {
             identifikator: identifikator
@@ -236,6 +286,15 @@ class Edit extends React.Component {
         choose.push(<option key={0} value={'1'}>DA</option>)
         choose.push(<option key={1} value={'0'}>NE</option>)
         choose.push(<option disabled key={2} value={'default'}>Odaberi DA ili NE</option>)
+
+        const tasks = this.state.tasks
+        let i = 0
+        const listTasks = tasks.map(task =>
+            <li key={i++} className="d-flex align-items-start">
+                <input className="mt-2" type="checkbox" defaultChecked={this.state.checked[task.idzad]} id={task.idzad} name={task.idzad} value={task.idzad} onChange={(e) => this.toggleTasks(e)} />
+                <label className="labelWidth" htmlFor={task.idzad}>{task.pitanje}<span className="font"> |ODGOVOR: {task.tocanodgovor}</span></label>
+            </li>
+        )
 
         return (
             <div className="d-flex flex-column justify-content-center">
@@ -394,9 +453,21 @@ class Edit extends React.Component {
                             </div>
 
                             <div className="row justify-content-md-center">
-                                <div className="form-group">
-                                    <label>Unesite ID zadataka koje želite u vježbi odvojene sa ","</label>
-                                    <input type="text" required name="idzadataka" value={this.state.idzadataka} className="form-control" placeholder={exerciseTasksPlaceholder} onChange={this.handleChange} />
+                                <div className="form-group mt-3">
+                                    <label>Odaberite zadatke koje želite da se rješavaju u vježbi:</label>
+                                    <Button variant="btn btn-primary" className="mx-2" onClick={this.handleClose}>Odaberi</Button>
+                                    {this.state.showPopup && <Popup
+                                        content={
+                                            <div className="d-flex flex-column justify-content-center align-items-center">
+                                                <h3>Označite zadatke koje želite u vježbi</h3>
+                                                <hr />
+                                                <ul>
+                                                    {listTasks}
+                                                </ul>
+                                            </div>
+                                        }
+                                        handleClose={this.handleClose}
+                                    />}
                                 </div>
                             </div>
 
@@ -408,7 +479,7 @@ class Edit extends React.Component {
                     </div>
                 }
                 {this.state.updateError &&
-                    <div className="mt-3"><Alert className="alert-dismissible" variant={'danger'}>{this.state.errorText}</Alert></div>}
+                    <div className="mt-3 mx-5"><Alert className="alert-dismissible" variant={'danger'}>{this.state.errorText}</Alert></div>}
             </div>
 
         );

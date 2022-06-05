@@ -98,7 +98,7 @@ class Welcome extends React.Component {
                         <Link to="/loginStudent" className="btn btn-primary btn-lg">START</Link>
                     </div>
                     <div className="mt-1">
-                        <span className=''>Učitelj/ica? </span> <Link to="/loginTeacher">Prijavi se!</Link>
+                        <span className=''>Nastavnik/ica? </span> <Link to="/loginTeacher">Prijavi se!</Link>
                     </div>
                 </div>
             </div >
