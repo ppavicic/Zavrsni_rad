@@ -24,48 +24,49 @@ router.post('/', async function (req, res) {
 
 router.get('/getExercise', async function (req, res) {
     rows = await getExerciseToSolve()
-    let zadaciIzVjezbe = rows[0].zadaci
-    let idzadataka = zadaciIzVjezbe.split(',')
-    let zadaci = []
-    let zadaciSlikovnoUnos = []
-    let zadaciOdabir = []
-    let zadaciUnos = []
-    let zadaciSlikovnoOdabir = []
-    for (i = 0; i < idzadataka.length; i++){
-        rows2 = await getTaskById(idzadataka[i])
-        if(rows2[0].vrsta === "slikovnoUnos"){
-            zadaciSlikovnoUnos.push(rows2[0])
-        }else if(rows2[0].vrsta === "odabir"){
-            zadaciOdabir.push(rows2[0])
-        }else if(rows2[0].vrsta === "unos"){
-            zadaciUnos.push(rows2[0])
-        }else if(rows2[0].vrsta === "slikovnoOdabir"){
-            zadaciSlikovnoOdabir.push(rows2[0])
+    if (rows.length != 0) {
+        let zadaciIzVjezbe = rows[0].zadaci
+        let idzadataka = zadaciIzVjezbe.split(',')
+        let zadaci = []
+        let zadaciSlikovnoUnos = []
+        let zadaciOdabir = []
+        let zadaciUnos = []
+        let zadaciSlikovnoOdabir = []
+        for (i = 0; i < idzadataka.length; i++) {
+            rows2 = await getTaskById(idzadataka[i])
+            if (rows2[0].vrsta === "slikovnoUnos") {
+                zadaciSlikovnoUnos.push(rows2[0])
+            } else if (rows2[0].vrsta === "odabir") {
+                zadaciOdabir.push(rows2[0])
+            } else if (rows2[0].vrsta === "unos") {
+                zadaciUnos.push(rows2[0])
+            } else if (rows2[0].vrsta === "slikovnoOdabir") {
+                zadaciSlikovnoOdabir.push(rows2[0])
+            }
         }
-    }
 
-    if(zadaciSlikovnoUnos.length != 0){
-        for(j = 0; j < zadaciSlikovnoUnos.length; j++){
-            zadaci.push(zadaciSlikovnoUnos[j])
+        if (zadaciSlikovnoUnos.length != 0) {
+            for (j = 0; j < zadaciSlikovnoUnos.length; j++) {
+                zadaci.push(zadaciSlikovnoUnos[j])
+            }
+        }
+        if (zadaciOdabir.length != 0) {
+            for (j = 0; j < zadaciOdabir.length; j++) {
+                zadaci.push(zadaciOdabir[j])
+            }
+        }
+        if (zadaciUnos.length != 0) {
+            for (j = 0; j < zadaciUnos.length; j++) {
+                zadaci.push(zadaciUnos[j])
+            }
+        }
+        if (zadaciSlikovnoOdabir.length != 0) {
+            for (j = 0; j < zadaciSlikovnoOdabir.length; j++) {
+                zadaci.push(zadaciSlikovnoOdabir[j])
+            }
         }
     }
-    if(zadaciOdabir.length != 0){
-        for(j = 0; j < zadaciOdabir.length; j++){
-            zadaci.push(zadaciOdabir[j])
-        }
-    }
-    if(zadaciUnos.length != 0){
-        for(j = 0; j < zadaciUnos.length; j++){
-            zadaci.push(zadaciUnos[j])
-        }
-    }
-    if(zadaciSlikovnoOdabir.length != 0){
-        for(j = 0; j < zadaciSlikovnoOdabir.length; j++){
-            zadaci.push(zadaciSlikovnoOdabir[j])
-        }
-    }
-
-    if (rows) {
+    if (rows.length != 0) {
         res.json({
             exercise: rows,
             tasks: zadaci
@@ -124,7 +125,7 @@ checkStudent = async function (iducenik, idrazred, idskole, idgrupe) {
                 WHERE iducenika = ` + iducenik + `AND idrazred =` + idrazred + `AND idskole =` + idskole;
 
     const sql2 = `SELECT * FROM logs
-                WHERE iducenika = ` + iducenik + `AND idgrupe =` + idgrupe;      
+                WHERE iducenika = ` + iducenik + `AND idgrupe =` + idgrupe;
     try {
         const result = await db.query(sql, []);
         const result2 = await db.query(sql2, []);
@@ -199,7 +200,7 @@ getTaskById = async function (idzadatka) {
     } catch (err) {
         console.log(err);
         throw err
-    } 
+    }
 }
 
 module.exports = router;
