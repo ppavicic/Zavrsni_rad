@@ -97,7 +97,7 @@ class PictureChoiceTask extends React.Component {
             }
         }
 
-        console.log(tocan, ukupno)
+        //console.log(tocan, ukupno)
         this.sendLog(ukupno)
         if (tocan !== ukupno) {
             this.setState({

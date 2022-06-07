@@ -24,10 +24,10 @@ router.post('/', async function (req, res) {
 
 router.get('/getExercise', async function (req, res) {
     rows = await getExerciseToSolve()
-    if (rows.length != 0) {
+    let zadaci = []
+    if (rows) {
         let zadaciIzVjezbe = rows[0].zadaci
         let idzadataka = zadaciIzVjezbe.split(',')
-        let zadaci = []
         let zadaciSlikovnoUnos = []
         let zadaciOdabir = []
         let zadaciUnos = []
@@ -66,14 +66,14 @@ router.get('/getExercise', async function (req, res) {
             }
         }
     }
-    if (rows.length != 0) {
+    if (rows) {
         res.json({
             exercise: rows,
             tasks: zadaci
         })
     } else {
         res.json({
-            err: "Greška pri dohvatu škola"
+            err: "Greška pri dohvatu vježbe"
         })
     }
 })
@@ -183,7 +183,11 @@ getExerciseToSolve = async function () {
 
     try {
         const result = await db.query(sql, []);
-        return result.rows
+        if (result.rows != 0) {
+            return result.rows
+        } else {
+            return undefined
+        }
     } catch (err) {
         console.log(err);
         throw err
