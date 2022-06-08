@@ -208,10 +208,10 @@ class TeacherProfile extends React.Component {
             </tr>
         )
         return (
-            <Container className="Margin-top">
+            <Container className="Margin-top font">
                 <br />
                 <h1 className="text-center mb-3 font">MOJ PROFIL</h1>
-                <div className="d-flex justify-content-around align-items-center font pozadina py-2">
+                <div className="d-flex justify-content-around align-items-center py-2">
                     <p>ŠKOLA: {skola}</p>
                     <Button variant="btn btn-outline-primary" className="btn-lg inline-" onClick={this.handlePopup}>OPCIJE</Button>
                 </div>
