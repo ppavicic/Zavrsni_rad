@@ -1,1 +1,3 @@
 # Zavrsni_rad
+Prije pokretanja aplikacije potrebno je napraviti lokalnu bazu podataka i onda napraviti tablice s naredbama iz datoteke "BAZA.txt".
+Nakon toga je potrebno napuniti bazu inicijalnim podacima tj. s podacima o nastavnicima, školama i razredima i novcu. Potrebno je s naredbom 'npm install' instalirati sve dependency-je i na backendu i na frontendu. U dva odvojena terminala potrebno se pozicionirat u direktorije 'api' i 'zavrsni_fronetnd' i naredbama 'npm start' pokrenuti backend i frontend dio aplikacije.
